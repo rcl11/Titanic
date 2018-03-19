@@ -9,7 +9,7 @@ TEST_DATA_PATH = "test.csv"
 CSV_COLUMN_NAMES = ['PassengerId','Survived','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
 CSV_COLUMN_NAMES_DATA = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
 SPECIES = ['Survived','Died']
-NAN_VALUES = {'PassengerId':0, 'Survived':0,'Pclass':0,'Name':'','Sex':'male','Age':0,'SibSp':0,'Parch':0,'Ticket':'','Fare':0,'Cabin':'','Embarked':''}
+NAN_VALUES = {'PassengerId':0, 'Survived':0,'Pclass':2,'Name':'','Sex':'male','Age':30,'SibSp':0,'Parch':0,'Ticket':'','Fare':10,'Cabin':'','Embarked':''}
 
 
 def load_data(y_name='Survived'):

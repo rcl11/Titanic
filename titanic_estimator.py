@@ -40,11 +40,16 @@ def main(argv):
 
     my_feature_columns = [
         tf.feature_column.numeric_column(key='Pclass'),
-        tf.feature_column.numeric_column(key='Age')
-     #   tf.feature_column.numeric_column(key='sibsp'),
-     #   tf.feature_column.numeric_column(key='parch'),
-     #   tf.feature_column.numeric_column(key='fare'),
-     #   tf.feature_column.numeric_column(key='cabin')
+        tf.feature_column.numeric_column(key='Age'),
+        tf.feature_column.numeric_column(key='SibSp'),
+        tf.feature_column.numeric_column(key='Parch'),
+        tf.feature_column.numeric_column(key='Fare'),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Sex',
+            vocabulary_list=["male", "female"])),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Embarked',
+            vocabulary_list=["C", "Q", "S"]))
     ]    
 
     # Build 2 hidden layer DNN with 10, 10 units respectively.
