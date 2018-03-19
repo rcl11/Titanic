@@ -1,24 +1,26 @@
 import pandas as pd
 import tensorflow as tf
 
-TRAIN_PATH = "train_perfect.csv"
+TRAIN_PATH = "train_1.csv"
 #TEST_PATH = "test.csv"
-TEST_PATH = "train_perfect_2.csv"
+TEST_PATH = "train_2.csv"
 
 CSV_COLUMN_NAMES = ['PassengerId','Survived','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
 SPECIES = ['Survived','Died']
+NAN_VALUES = {'PassengerId':0, 'Survived':0,'Pclass':0,'Name':'','Sex':'male','Age':0,'SibSp':0,'Parch':0,'Ticket':'','Fare':0,'Cabin':'','Embarked':''}
 
 
 def load_data(y_name='Survived'):
     """Returns the Titanic dataset as (train_x, train_y), (test_x, test_y)."""
 
     train = pd.read_csv(TRAIN_PATH, names=CSV_COLUMN_NAMES, header=0)
-    train.fillna('', inplace=True)
-    train[train.isnull().any(axis=1)]
+    train.fillna(value=NAN_VALUES, inplace=True)
+    #train[train.isnull().any(axis=1)]
+    print train
     train_x, train_y = train, train.pop(y_name)
 
     test = pd.read_csv(TEST_PATH, names=CSV_COLUMN_NAMES, header=0)
-    test.fillna('', inplace=True)
+    test.fillna(value=NAN_VALUES, inplace=True)
     test_x, test_y = test, test.pop(y_name)
 
     return (train_x, train_y), (test_x, test_y)
