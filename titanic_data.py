@@ -4,8 +4,10 @@ import tensorflow as tf
 TRAIN_PATH = "train_1.csv"
 #TEST_PATH = "test.csv"
 TEST_PATH = "train_2.csv"
+TEST_DATA_PATH = "test.csv"
 
 CSV_COLUMN_NAMES = ['PassengerId','Survived','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
+CSV_COLUMN_NAMES_DATA = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
 SPECIES = ['Survived','Died']
 NAN_VALUES = {'PassengerId':0, 'Survived':0,'Pclass':0,'Name':'','Sex':'male','Age':0,'SibSp':0,'Parch':0,'Ticket':'','Fare':0,'Cabin':'','Embarked':''}
 
@@ -15,8 +17,6 @@ def load_data(y_name='Survived'):
 
     train = pd.read_csv(TRAIN_PATH, names=CSV_COLUMN_NAMES, header=0)
     train.fillna(value=NAN_VALUES, inplace=True)
-    #train[train.isnull().any(axis=1)]
-    print train
     train_x, train_y = train, train.pop(y_name)
 
     test = pd.read_csv(TEST_PATH, names=CSV_COLUMN_NAMES, header=0)
@@ -25,6 +25,10 @@ def load_data(y_name='Survived'):
 
     return (train_x, train_y), (test_x, test_y)
 
+def load_test_data(y_name='Survived'):
+     test = pd.read_csv(TEST_DATA_PATH, names=CSV_COLUMN_NAMES_DATA, header=0)
+     test.fillna(value=NAN_VALUES, inplace=True)
+     return test
 
 def train_input_fn(features, labels, batch_size):
     """An input function for training"""

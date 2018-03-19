@@ -11,7 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-"""An Example of a DNNClassifier for the Iris dataset."""
+"""An Example of a DNNClassifier for the Titanic dataset."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -67,31 +67,28 @@ def main(argv):
                                                 args.batch_size))
 
     print('\nTest set accuracy: {accuracy:0.3f}\n'.format(**eval_result))
-    '''
+    
 
     # Generate predictions from the model
-    expected = ['Setosa', 'Versicolor', 'Virginica']
-    predict_x = {
-        'SepalLength': [5.1, 5.9, 6.9],
-        'SepalWidth': [3.3, 3.0, 3.1],
-        'PetalLength': [1.7, 4.2, 5.4],
-        'PetalWidth': [0.5, 1.5, 2.1],
-    }
+    #expected = ['Setosa', 'Versicolor', 'Virginica']
+    predict = titanic_data.load_test_data()
+    print(predict)
 
     predictions = classifier.predict(
-        input_fn=lambda:iris_data.eval_input_fn(predict_x,
+        input_fn=lambda:titanic_data.eval_input_fn(predict,
                                                 labels=None,
                                                 batch_size=args.batch_size))
 
-    template = ('\nPrediction is "{}" ({:.1f}%), expected "{}"')
+    template = ('\nPrediction is "{}" ({:.1f}%) for class ID: "{}"')
 
-    for pred_dict, expec in zip(predictions, expected):
+    #for pred_dict, expec in zip(predictions, expected):
+    for pred_dict in predictions:
         class_id = pred_dict['class_ids'][0]
         probability = pred_dict['probabilities'][class_id]
 
-        print(template.format(iris_data.SPECIES[class_id],
-                              100 * probability, expec))
-    '''
+        print(template.format(titanic_data.SPECIES[class_id],
+                              100 * probability, class_id))
+   
 
 
 if __name__ == '__main__':
