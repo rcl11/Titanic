@@ -48,6 +48,12 @@ def main(argv):
             key='Sex',
             vocabulary_list=["male", "female"])),
         tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Title',
+            vocabulary_list=['Miss.', 'Mme.', 'Rev.', 'Dona.', 'Jonkheer.', 'Sir.', 'Mlle.', 'Mrs.', 'Capt.', 'Col.', 'Ms.', 'Mr.', 'Lady.', 'Dr.', 'the', 'Master.', 'Major.', 'Don.'])),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Deck',
+            vocabulary_list=['A', 'C', 'B', 'E', 'D', 'G', 'F', 'T'])),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
             key='Embarked',
             vocabulary_list=["C", "Q", "S"]))
     ]    
@@ -77,7 +83,7 @@ def main(argv):
     # Generate predictions from the model
     #expected = ['Setosa', 'Versicolor', 'Virginica']
     predict = titanic_data.load_test_data()
-    print(predict)
+    #print(predict)
 
     predictions = classifier.predict(
         input_fn=lambda:titanic_data.eval_input_fn(predict,
@@ -85,15 +91,23 @@ def main(argv):
                                                 batch_size=args.batch_size))
 
     template = ('\nPrediction is "{}" ({:.1f}%) for class ID: "{}"')
+    template2 = ('{},{}\n')
 
     #for pred_dict, expec in zip(predictions, expected):
-    for pred_dict in predictions:
+    outfile = open("predictions.csv","w")
+    outfile.write("PassengerID,Survived\n")
+    
+    for counter,pred_dict in enumerate(predictions):
+        #print(counter)
+        #print(pred_dict)
         class_id = pred_dict['class_ids'][0]
         probability = pred_dict['probabilities'][class_id]
-
-        print(template.format(titanic_data.SPECIES[class_id],
-                              100 * probability, class_id))
-   
+        #print(predict.iloc[counter,predict.columns.get_loc('PassengerId')], class_id)
+        #print(template2.format(predict.iloc[counter,predict.columns.get_loc('PassengerId')],class_id))
+        outfile.write(template2.format(predict.iloc[counter,predict.columns.get_loc('PassengerId')],class_id))
+        #print(predict["PassengerID"])
+        #print(template.format(titanic_data.SPECIES[class_id],
+        #                      100 * probability, class_id))
 
 
 if __name__ == '__main__':
