@@ -43,6 +43,7 @@ def main(argv):
         tf.feature_column.numeric_column(key='Age'),
         tf.feature_column.numeric_column(key='SibSp'),
         tf.feature_column.numeric_column(key='Parch'),
+        tf.feature_column.numeric_column(key='Family_Size'),
         tf.feature_column.numeric_column(key='Fare'),
         tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
             key='Sex',

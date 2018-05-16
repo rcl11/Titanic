@@ -34,7 +34,9 @@ for file in files:
             all_decks.append(str(deck)[0])
         else :
             train["Deck"] = ''    
-    
+   
+    train['Family_Size']=train['SibSp']+train['Parch']
+
     train.to_csv(file+"_corrected.csv")
 
 print list(set(all_titles))
