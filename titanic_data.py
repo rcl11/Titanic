@@ -7,10 +7,10 @@ TRAIN_PATH = "train_corrected.csv"
 TEST_PATH = "train_2_corrected.csv"
 TEST_DATA_PATH = "test_corrected.csv"
 
-CSV_COLUMN_NAMES = ['PassengerId','Survived','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked','Title','Deck','Family_Size']
-CSV_COLUMN_NAMES_DATA = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked','Title','Deck','Family_Size']
+CSV_COLUMN_NAMES = ['PassengerId','Survived','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked','Title','Deck','Family_Size','Family_Scale']
+CSV_COLUMN_NAMES_DATA = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked','Title','Deck','Family_Size','Family_Scale']
 SPECIES = ['Survived','Died']
-NAN_VALUES = {'PassengerId':0, 'Survived':0,'Pclass':2,'Name':'','Sex':'male','Age':30,'SibSp':0,'Parch':0,'Ticket':'','Fare':10,'Cabin':'','Embarked':'','Title':'','Deck':''}
+NAN_VALUES = {'PassengerId':0, 'Survived':0,'Name':'','Ticket':'','Fare':10,'Cabin':'','Embarked':'','Title':'','Deck':''}
 
 
 def load_data(y_name='Survived'):

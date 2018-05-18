@@ -41,22 +41,25 @@ def main(argv):
     my_feature_columns = [
         tf.feature_column.numeric_column(key='Pclass'),
         tf.feature_column.numeric_column(key='Age'),
-        #tf.feature_column.numeric_column(key='SibSp'),
-        #tf.feature_column.numeric_column(key='Parch'),
-        tf.feature_column.numeric_column(key='Family_Size'),
-        #tf.feature_column.numeric_column(key='Fare'),
+        tf.feature_column.numeric_column(key='SibSp'),
+        tf.feature_column.numeric_column(key='Parch'),
+        #tf.feature_column.numeric_column(key='Family_Size'),
+        tf.feature_column.numeric_column(key='Fare'),
         tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
             key='Sex',
             vocabulary_list=["male", "female"])),
         tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Family_Scale',
+            vocabulary_list=["Alone", "Small", "Large"])),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
             key='Title',
             vocabulary_list=['Miss.', 'Mme.', 'Rev.', 'Dona.', 'Jonkheer.', 'Sir.', 'Mlle.', 'Mrs.', 'Capt.', 'Col.', 'Ms.', 'Mr.', 'Lady.', 'Dr.', 'the', 'Master.', 'Major.', 'Don.'])),
-        #tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
-        #    key='Deck',
-        #    vocabulary_list=['A', 'C', 'B', 'E', 'D', 'G', 'F', 'T']))
-        #tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
-        #    key='Embarked',
-        #    vocabulary_list=["C", "Q", "S"]))
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Deck',
+            vocabulary_list=['A', 'C', 'B', 'E', 'D', 'G', 'F', 'T'])),
+        tf.feature_column.indicator_column(tf.feature_column.categorical_column_with_vocabulary_list(
+            key='Embarked',
+            vocabulary_list=["C", "Q", "S"]))
     ]    
 
     # Build 2 hidden layer DNN with 10, 10 units respectively.
